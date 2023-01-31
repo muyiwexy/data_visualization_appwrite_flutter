@@ -1,7 +1,6 @@
 import 'package:data_visualization/component/linechartwidget.dart';
 import 'package:flutter/material.dart';
 
-
 class Homepage extends StatefulWidget {
   final String title;
   const Homepage({super.key, required this.title});
@@ -11,18 +10,16 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-          backgroundColor: Colors.black87,
-          elevation: 0,
-        ),
-        body: SafeArea(
-            child: buildcomponent()),
-      );
+      appBar: AppBar(
+        title: Text(widget.title),
+        backgroundColor: Colors.black87,
+        elevation: 0,
+      ),
+      body: SafeArea(child: buildcomponent()),
+    );
   }
 
   Widget circularloader() {
@@ -58,26 +55,47 @@ class _HomepageState extends State<Homepage> {
                   color: const Color.fromARGB(221, 21, 21, 21),
                 ),
                 child: Column(
-                  children: const [
+                  children: [
                     Align(
                         alignment: Alignment.topCenter,
                         child: Padding(
-                          padding: EdgeInsets.only(bottom: 30, top: 10),
-                          child: Text(
-                            "Order Number & Transaction",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 25),
-                          ),
-                        )),
-                    Expanded(
+                            padding: const EdgeInsets.only(bottom: 30, top: 10),
+                            child: RichText(
+                              text: const TextSpan(
+                                children: <TextSpan>[
+                                  TextSpan(
+                                      text: 'Order Number',
+                                      style: TextStyle(
+                                          color: Colors.red,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 25)),
+                                  TextSpan(
+                                      text: ' & ',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 25)),
+                                  TextSpan(
+                                      text: 'Transaction Number',
+                                      style: TextStyle(
+                                          color: Color.fromARGB(
+                                            255,
+                                            0,
+                                            35,
+                                            65,
+                                          ),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 25)),
+                                ],
+                              ),
+                            ))),
+                    const Expanded(
                       child: Align(
-                          alignment: Alignment.center,
-                          child: LineChartWidget(),
-                            ),
+                        alignment: Alignment.center,
+                        child: LineChartWidget(),
+                      ),
                     )
                   ],
-                )
-                ),
+                )),
           ),
           IntrinsicWidth(
               child: Container(
@@ -104,12 +122,12 @@ class _HomepageState extends State<Homepage> {
                                 fontWeight: FontWeight.bold, fontSize: 22)),
                       ),
                       const Expanded(
-                              child: Align(
-                            alignment: Alignment.center,
-                            child: Text("9",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 25)),
-                          ))
+                          child: Align(
+                        alignment: Alignment.center,
+                        child: Text("9",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 25)),
+                      ))
                     ],
                   )))
         ],
