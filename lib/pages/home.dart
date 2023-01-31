@@ -55,12 +55,13 @@ class _HomepageState extends State<Homepage> {
       return Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
-          backgroundColor: Colors.black87,
+          backgroundColor: Color.fromARGB(221, 15, 11, 43),
           elevation: 0,
         ),
         body: SafeArea(
-            child:
-                state.isLoading == false ? circularloader() : buildcomponent()),
+            child: state.isLoading == false
+                ? circularloader()
+                : buildcomponent(context, state, child)),
       );
     });
   }
@@ -71,7 +72,7 @@ class _HomepageState extends State<Homepage> {
     );
   }
 
-  Widget buildcomponent() {
+  Widget buildcomponent(context, state, child) {
     return Container(
       height: MediaQuery.of(context).size.height,
       decoration: const BoxDecoration(
@@ -100,28 +101,46 @@ class _HomepageState extends State<Homepage> {
                 ),
                 child: Column(
                   children: [
-                    const Align(
+                    Align(
                         alignment: Alignment.topCenter,
                         child: Padding(
-                          padding: EdgeInsets.only(bottom: 30, top: 10),
-                          child: Text(
-                            "Order Number & Transaction",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 25),
-                          ),
+                          padding: const EdgeInsets.only(bottom: 30, top: 10),
+                          child: RichText(
+                              text: const TextSpan(
+                                children: <TextSpan>[
+                                  TextSpan(
+                                      text: 'Order Number',
+                                      style: TextStyle(
+                                          color: Colors.red,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 25)),
+                                  TextSpan(
+                                      text: ' & ',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 25)),
+                                  TextSpan(
+                                      text: 'Transaction Number',
+                                      style: TextStyle(
+                                          color: Color.fromARGB(
+                                            255,
+                                            0,
+                                            35,
+                                            65,
+                                          ),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 25)),
+                                ],
+                              ),
+                            )
                         )),
                     Expanded(
                       child: Align(
                           alignment: Alignment.center,
-                          child: Consumer<AuthProvider>(
-                            builder: (context, state, child) {
-                              return LineChartWidget(numOrders, transactions);
-                            },
-                          )),
+                          child: LineChartWidget(numOrders, transactions)),
                     )
                   ],
                 )
-                // child: buildOrderChart(),
                 ),
           ),
           IntrinsicWidth(
@@ -144,30 +163,22 @@ class _HomepageState extends State<Homepage> {
                       Container(
                         padding: const EdgeInsets.only(
                             top: 10, bottom: 10.0, left: 5.0, right: 5.0),
-                        child: const Text("Transaction",
+                        child: const Text("Number of Order",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 22)),
                       ),
-                      Consumer<AuthProvider>(
-                        builder: (context, state, child) {
-                          return Expanded(
-                              child: Align(
-                            alignment: Alignment.center,
-                            child: Text("${state.itemtwo![0].productnumber}",
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 25)),
-                          ));
-                        },
-                      )
+                      Expanded(
+                          child: Align(
+                        alignment: Alignment.center,
+                        child: Text("${state.itemtwo![0].productnumber}",
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 25)),
+                      ))
                     ],
                   )))
         ],
       ),
     );
-  }
-
-  Widget buildOrderChart() {
-    return LineChart(LineChartData());
   }
 }
 
