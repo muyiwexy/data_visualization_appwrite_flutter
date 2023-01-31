@@ -1,7 +1,5 @@
-import 'package:data_visualization/authprovider/authstate.dart';
 import 'package:data_visualization/pages/home.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,16 +10,12 @@ class MyApp extends StatelessWidget {
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) => ChangeNotifierProvider(
-        create: (context) => AuthProvider(),
-        lazy: false,
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-          ),
-          home: const Homepage(title: 'Dashboard'),
+  Widget build(BuildContext context) => MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
         ),
+        home: const Homepage(title: 'Dashboard'),
       );
 }
