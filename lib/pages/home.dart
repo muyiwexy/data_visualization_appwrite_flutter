@@ -15,39 +15,6 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  List<NumOrder> get numOrders {
-    AuthProvider state = Provider.of<AuthProvider>(context, listen: false);
-    final randomNumbers = state.itemone!;
-    final mapper = randomNumbers.asMap().entries.map(
-      (e) {
-        int idx = e.key;
-        final item = randomNumbers[idx].ordernumber;
-        return item;
-      },
-    ).toList();
-
-    return mapper
-        .mapIndexed(
-            (index, element) => NumOrder(x: index.toDouble(), y: element!))
-        .toList();
-  }
-
-  List<Transactions> get transactions {
-    AuthProvider state = Provider.of<AuthProvider>(context, listen: false);
-    final randomNumbers = state.itemone!;
-    final mapper = randomNumbers.asMap().entries.map(
-      (e) {
-        int idx = e.key;
-        final item = randomNumbers[idx].transactionnumber;
-        return item;
-      },
-    ).toList();
-
-    return mapper
-        .mapIndexed(
-            (index, element) => Transactions(x: index.toDouble(), y: element!))
-        .toList();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -165,22 +132,4 @@ class _HomepageState extends State<Homepage> {
       ),
     );
   }
-
-  Widget buildOrderChart() {
-    return LineChart(LineChartData());
-  }
-}
-
-class NumOrder {
-  final double x;
-  final double y;
-
-  NumOrder({required this.x, required this.y});
-}
-
-class Transactions {
-  final double x;
-  final double y;
-
-  Transactions({required this.x, required this.y});
 }
