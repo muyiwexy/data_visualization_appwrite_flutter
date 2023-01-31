@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import '../pages/home.dart';
 
 class LineChartWidget extends StatelessWidget {
-  final List<NumOrder> points;
-  final List<Transactions> transactions;
 
   const LineChartWidget(this.points, this.transactions, {Key? key})
       : super(key: key);
@@ -18,16 +16,20 @@ class LineChartWidget extends StatelessWidget {
         LineChartData(
           lineBarsData: [
             LineChartBarData(
-                spots: points.map((point) => FlSpot(point.x, point.y)).toList(),
+                spots: [
+                  (30,10)
+                  (20,20)
+                ],
                 isCurved: false,
                 dotData: FlDotData(
                   show: true,
                 ),
                 color: Colors.red),
             LineChartBarData(
-              spots: transactions
-                  .map((transaction) => FlSpot(transaction.x, transaction.y))
-                  .toList(),
+              spots: [
+                  (30,10)
+                  (20,20)
+                ],
               isCurved: false,
               dotData: FlDotData(
                 show: true,
